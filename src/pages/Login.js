@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Col, Grid, Row, Button } from 'react-bootstrap';
 
+import Background from '../css/bg2.jpg';
+import './../css/auth.css';
 import { Validation } from './../functions/Validation';
 
 class Login extends Component {
+
+    // componentWillMount(){
+    //     document.body.style.backgroundImage=`url(${Background})`;
+    // }
 
     constructor(props) {
         super(props);
@@ -58,46 +64,51 @@ class Login extends Component {
 
     render() {
         return (
-            <Grid>
-                <section className="auth-form">
-                    <form>
-                        <Row>
-                            <Col md={6} mdOffset={3}>
-                                <FormGroup controlId="email" validationState={this.getValidationState('email')}>
-                                    <FormControl
-                                        type="text"
-                                        name="email"
-                                        value={this.state.email.value}
-                                        placeholder="Enter email"
-                                        onChange={(e) => this.handleChanges(e)}
-                                    />
-                                    <FormControl.Feedback />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={6} mdOffset={3}>
-                                <FormGroup controlId="password" validationState={this.getValidationState('password')}>
-                                    <FormControl
-                                        type="password"
-                                        name="password"
-                                        value={this.state.password.value}
-                                        placeholder="Enter password (minimum 6 characters)"
-                                        onChange={(e) => this.handleChanges(e)}
-                                    />
-                                    <FormControl.Feedback />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={6} mdOffset={3}>
-                                <Button type="submit">
-                                    Submit
-                                </Button>
-                            </Col>
-                        </Row>
-                    </form>
-                </section>
+            <Grid className="auth-page">
+
+                <Row>
+                    <Col md={6} mdOffset={3}>
+                        <section className="auth-form">
+                            <form>
+                                <Row>
+                                    <Col md={6} mdOffset={3}>
+                                        <FormGroup controlId="email" validationState={this.getValidationState('email')}>
+                                            <FormControl
+                                                type="text"
+                                                name="email"
+                                                value={this.state.email.value}
+                                                placeholder="Enter email"
+                                                onChange={(e) => this.handleChanges(e)}
+                                            />
+                                            <FormControl.Feedback />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6} mdOffset={3}>
+                                        <FormGroup controlId="password" validationState={this.getValidationState('password')}>
+                                            <FormControl
+                                                type="password"
+                                                name="password"
+                                                value={this.state.password.value}
+                                                placeholder="Enter password (minimum 6 characters)"
+                                                onChange={(e) => this.handleChanges(e)}
+                                            />
+                                            <FormControl.Feedback />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6} mdOffset={3}>
+                                        <Button type="submit">
+                                            Submit
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </form>
+                        </section>
+                    </Col>
+                </Row>
             </Grid>
         );
     }
