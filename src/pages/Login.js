@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Col, Grid, Row, Button } from 'react-bootstrap';
 
-import Background from '../css/bg2.jpg';
 import './../css/auth.css';
 import { Validation } from './../functions/Validation';
 
 class Login extends Component {
-
-    // componentWillMount(){
-    //     document.body.style.backgroundImage=`url(${Background})`;
-    // }
 
     constructor(props) {
         super(props);
