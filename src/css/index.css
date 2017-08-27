@@ -7,7 +7,7 @@ body {
   background: #FFFFFF;
 }
 .auth-page{
-  padding-top: 15%;
+  padding-top: 10%;
 }
 .auth-form{
   background-color: #EBFCFF;
@@ -74,6 +74,7 @@ body {
   border: 1px solid #D3D3D3;
   background-color: #FFF;
   position: relative;
+  margin-bottom: 20px;
 }
 .small-movie-title{
   border-bottom: 1px solid #D3D3D3;
@@ -83,7 +84,7 @@ body {
   min-height: 40px;
 }
 .small-movie-tags{
-  color: #c7c7c7;
+  color: #c4c4c4;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -115,4 +116,30 @@ body {
 .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
   color: #FFFFFF;
   background-color: transparent;
+}
+.side-navigation{
+  background-color: #f7f7f7;
+  border:1px solid #c4c4c4;
+}
+.side-navigation a{
+  color:#c4c4c4;
+}
+.side-navigation li{
+  border-bottom: 1px solid #ccc;
+}
+.side-navigation li:last-of-type{
+  border-bottom: none;
+}
+.nav>li>a:focus, .nav>li>a:hover{
+  background: #fff;
+}
+.movie-small-list, .movie-details{
+  margin-top: -22px;
+}
+.movie-details img{
+  width: 100%;
+}
+.movie-details a{
+  color: #008491;
+  text-decoration: none;
 }

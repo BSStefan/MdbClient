@@ -7,6 +7,8 @@ import Register from './../pages/Register';
 import Navigation from './Navigation';
 import { NotFound } from './../pages/NotFound';
 import Dashboard from './../pages/user/Dashboard';
+import Movie from '../pages/user/Movie';
+
 
 class App extends Component {
     componentWillMount() {
@@ -23,9 +25,10 @@ class App extends Component {
                           <Route exact path="/register" component={Register}/>
                           <Route exact path="/logout" component={Dashboard}/>
                           <Route exact path="/home" component={Dashboard}/>
-                          <Route exact path="/user/movies" component={Dashboard}/>
-                          <Route exact path="/user/watchlist" component={Dashboard}/>
-                          <Route exact path="/user/profile" component={Dashboard}/>
+                          <Route exact path="/movie/:id" component={Movie}/>
+                          <Route exact path="/movies" component={Dashboard}/>
+                          <Route exact path="/watchlist" component={Dashboard}/>
+                          <Route exact path="/profile" component={Dashboard}/>
                           <Route component={NotFound}/>
                       </Switch>
                   </section>

@@ -27,6 +27,26 @@ class SmallMovieList extends Component {
                         <SmallMovie/>
                     </Col>
                 </Row>
+                <Row>
+                    <Col sm={2}>
+                        <SmallMovie/>
+                    </Col>
+                    <Col sm={2}>
+                        <SmallMovie/>
+                    </Col>
+                    <Col sm={2}>
+                        <SmallMovie/>
+                    </Col>
+                    <Col sm={2}>
+                        <SmallMovie/>
+                    </Col>
+                    <Col sm={2}>
+                        <SmallMovie/>
+                    </Col>
+                    <Col sm={2}>
+                        <SmallMovie/>
+                    </Col>
+                </Row>
             </Grid>
         )
     }
