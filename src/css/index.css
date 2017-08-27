@@ -9,13 +9,39 @@ body {
   padding-top: 20%;
 }
 .auth-form{
-  background-color: #F1F3CE;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  background-color: #EBFCFF;
+  padding-bottom: 60px;
+  padding-top: 10px;
+  border: 1px solid #EBFCFF;
+  border-radius: 5px;
+  opacity: 0.9;
 }
 .auth-mdb-title{
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
-.auth-mdb-title h1{
-  color: #F1F3CE;
+/*.auth-mdb-title h1{*/
+  /*color: #007991;*/
+/*}*/
+.mdb-main-btn{
+  background-color: #008491 !important;
+  color :#FFF;
+}
+.mdb-main-btn:hover, .mdb-main-btn:focus{
+  background-color: #007991 !important;
+  color: #FFF;
+}
+.redireact-register{
+  margin-top: 10px;
+}
+.redireact-register a{
+  margin-left: 2px;
+}
+.redireact-register a:hover{
+  text-decoration: none;
+}
+.react-datepicker__input-container, .react-datepicker-wrapper{
+  width: 100%;
+}
+.react-datepicker-wrapper{
+  margin-bottom: 15px;
 }

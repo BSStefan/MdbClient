@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, ControlLabel, Col, Grid, Row, Button } from 'react-bootstrap';
+import { FormGroup, FormControl, Col, Grid, Row, Button } from 'react-bootstrap';
+import {NavLink} from 'react-router-dom';
 
 import './../css/auth.css';
 import { Validation } from './../functions/Validation';
@@ -35,7 +36,7 @@ class Login extends Component {
             validateMsg = '';
         }
         else {
-            validate = 'error'
+            validate = 'error';
             validateMsg = result[1];
         }
 
@@ -60,13 +61,20 @@ class Login extends Component {
     render() {
         return (
             <Grid className="auth-page">
-
                 <Row>
                     <Col md={6} mdOffset={3}>
-                        <section className="auth-form">
+                        <section className="auth-form text-center">
+                            <div className="auth-mdb-title">
+                                <h1>
+                                    Log In
+                                </h1>
+                                <h4>
+                                    to your personal movie book
+                                </h4>
+                            </div>
                             <form>
                                 <Row>
-                                    <Col md={6} mdOffset={3}>
+                                    <Col md={8} mdOffset={2}>
                                         <FormGroup controlId="email" validationState={this.getValidationState('email')}>
                                             <FormControl
                                                 type="text"
@@ -80,7 +88,7 @@ class Login extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md={6} mdOffset={3}>
+                                    <Col md={8} mdOffset={2}>
                                         <FormGroup controlId="password" validationState={this.getValidationState('password')}>
                                             <FormControl
                                                 type="password"
@@ -94,13 +102,23 @@ class Login extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md={6} mdOffset={3}>
-                                        <Button type="submit">
-                                            Submit
+                                    <Col md={8} mdOffset={2} className="text-center">
+                                        <Button type="submit" block className="mdb-main-btn">
+                                            Log In
                                         </Button>
                                     </Col>
                                 </Row>
                             </form>
+                            <Row>
+                                <Col>
+                                   <p className="redireact-register">
+                                        Not a member?
+                                        <NavLink exact to="/register">
+                                           Register
+                                        </NavLink>
+                                   </p>
+                                </Col>
+                            </Row>
                         </section>
                     </Col>
                 </Row>
