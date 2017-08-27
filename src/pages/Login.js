@@ -7,6 +7,15 @@ import { Validation } from './../functions/Validation';
 
 class Login extends Component {
 
+    componentWillMount() {
+        document.body.style.background = '#007991';
+        document.body.style.background =  '-webkit-linear-gradient(to right, #78ffd6, #007991)';
+        document.body.style.background = 'linear-gradient(to right, #78ffd6, #007991)';
+    }
+    componentWillUnmount() {
+        document.body.style.background = '#FFF';
+    }
+
     constructor(props) {
         super(props);
         this.state={

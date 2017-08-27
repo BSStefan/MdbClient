@@ -4,15 +4,24 @@ body{
     background: linear-gradient(to right, #78ffd6, #007991); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .navbar-default{
-    background-color: transparent ;
+    background: #007991;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #78ffd6, #007991);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #78ffd6, #007991); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-color: transparent;
 }
-.navbar-default .navbar-brand,.navbar-default .navbar-nav>li>a{
+.navbar-default .navbar-brand,.navbar-default .navbar-nav>li>a, .navbar-brand a{
+    text-decoration: none;
     color: white;
 }
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
-    color: #EBFCFF ;
+.navbar-header li{
+    list-style: none;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #EBFCFF;
 }
 .navbar-default .navbar-brand:focus{
-    color: #EBFCFF ;
+    color: #EBFCFF;
+}
+.navbar-brand a:hover{
+    color: #EBFCFF;
 }

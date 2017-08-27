@@ -4,9 +4,10 @@ body {
   font-family: sans-serif;
   height: 100%;
   width: 100%;
+  background: #FFFFFF;
 }
 .auth-page{
-  padding-top: 20%;
+  padding-top: 15%;
 }
 .auth-form{
   background-color: #EBFCFF;
@@ -44,4 +45,74 @@ body {
 }
 .react-datepicker-wrapper{
   margin-bottom: 15px;
+}
+.not-found-text{
+  color:#FFF;
+  margin-top: 30%;
+}
+.navbar-default .navbar-nav>.open>a{
+  color: #FFFFFF !important;
+  background-color: #008491 !important;
+}
+.dropdown-menu{
+  background-color: #008491;
+}
+.dropdown-menu>li>a{
+  color: #fff;
+}
+.dropdown-menu>li>a:hover{
+  color: #007991;
+}
+.small-image{
+  width: 100%;
+  max-height: 300px;
+}
+.dashboard{
+  margin-top: 100px;
+}
+.small-movie{
+  border: 1px solid #D3D3D3;
+  background-color: #FFF;
+  position: relative;
+}
+.small-movie-title{
+  border-bottom: 1px solid #D3D3D3;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+  min-height: 40px;
+}
+.small-movie-tags{
+  color: #c7c7c7;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.small-movie-reaction{
+  min-height: 20px;
+}
+.small-movie-about{
+  position: absolute;
+  bottom: 0px;
+  background-color: #fff;
+  opacity: 0.5;
+  width: 100%;
+}
+.small-movie-about:hover{
+  opacity: 0.8;
+}
+.small-movie-reaction .reaction-number{
+  margin-right: 10%;
+}
+.small-movie-reaction span{
+  margin-right: 3%;
+  margin-left: 3%;
+}
+
+.navbar-default .navbar-nav>.active>a {
+  color: #FFFFFF;
+  background-color: transparent;
+}
+.navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  color: #FFFFFF;
+  background-color: transparent;
 }

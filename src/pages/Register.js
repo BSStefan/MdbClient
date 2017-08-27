@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, Col, Grid, Row, Button } from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 
+import './../css/auth.css';
 import { Validation } from './../functions/Validation';
 
 class Register extends Component {
+
+    componentWillMount() {
+        document.body.style.background = '#007991';
+        document.body.style.background =  '-webkit-linear-gradient(to right, #78ffd6, #007991)';
+        document.body.style.background = 'linear-gradient(to right, #78ffd6, #007991)';
+    }
+    componentWillUnmount() {
+        document.body.style.background = '#FFF';
+    }
 
     constructor(props) {
         super(props);
