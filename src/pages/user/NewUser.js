@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col} from 'react-bootstrap';
-import { AsyncTypeahead} from 'react-bootstrap-typeahead';
-var Typeahead = require('react-bootstrap-typeahead').Typeahead;
+import SearchMovies from "../../components/SearchMovies";
 
 class NewUser extends Component {
 
@@ -13,50 +12,37 @@ class NewUser extends Component {
         };
     }
 
+    componentWillMount() {
+        document.body.style.background = '#007991';
+        document.body.style.background =  '-webkit-linear-gradient(to right, #78ffd6, #007991)';
+        document.body.style.background = 'linear-gradient(to right, #78ffd6, #007991)';
+    }
+    componentWillUnmount() {
+        document.body.style.background = '#FFF';
+    }
+
     render() {
         return (
-            <div className="start-form">
-                <AsyncTypeahead
-                    {...this.state}
-                    labelKey="login"
-                    onSearch={this._handleSearch}
-                    placeholder="Search for a movie"
-                    renderMenuItemChildren={this._renderMenuItemChildren}
-                />
-            </div>
+            <Grid className="auth-page">
+                <Row>
+                    <Col md={6} mdOffset={3}>
+                        <section className="auth-form text-center">
+                            <div className="start-form">
+                                <h1>Your favorite three movies</h1>
+                                <Row>
+                                    <Col md={8} mdOffset={2}>
+                                        <SearchMovies/>
+                                    </Col>
+                                </Row>
+                            </div>
+                        </section>
+                    </Col>
+                </Row>
+            </Grid>
+
         );
     }
 
-    _renderMenuItemChildren(option, props, index) {
-        return (
-            <div key={option.id}>
-                <img
-                    src={option.avatar_url}
-                    style={{
-                        height: '24px',
-                        marginRight: '10px',
-                        width: '24px',
-                    }}
-                />
-                <span>{option.login}</span>
-            </div>
-        );
-    }
-
-    _handleChange = e => {
-        const {checked, name} = e.target;
-        this.setState({[name]: checked});
-    }
-
-    _handleSearch = query => {
-        if (!query) {
-            return;
-        }
-
-        fetch(`https://api.github.com/search/users?q=${query}`)
-            .then(resp => resp.json())
-            .then(json => this.setState({options: json.items}));
-    }
 }
 
 export default NewUser;
