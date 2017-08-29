@@ -8,6 +8,7 @@ import Navigation from './Navigation';
 import { NotFound } from './../pages/NotFound';
 import Dashboard from './../pages/user/Dashboard';
 import Movie from '../pages/user/Movie';
+import NewUser from '../pages/user/NewUser';
 
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
                           <Route exact path="/movies" component={Dashboard}/>
                           <Route exact path="/watchlist" component={Dashboard}/>
                           <Route exact path="/profile" component={Dashboard}/>
+                          <Route exact path="/start" component={NewUser}/>
                           <Route component={NotFound}/>
                       </Switch>
                   </section>

@@ -22,7 +22,7 @@ class SideNavigation extends Component {
                         <NavItem eventKey={4}>Genres</NavItem>
                     </LinkContainer>
                     <LinkContainer to="#">
-                        <NavItem eventKey={4}>All</NavItem>
+                        <NavItem eventKey={4}>Current in cinema</NavItem>
                     </LinkContainer>
                 </Nav>
             </aside>
