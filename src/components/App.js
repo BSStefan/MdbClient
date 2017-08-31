@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Login from './../pages/Login';
 import Register from './../pages/Register';
 import Navigation from './Navigation';
-import { NotFound } from './../pages/NotFound';
+import NotFound from './../pages/NotFound';
 import Dashboard from './../pages/user/Dashboard';
 import Movie from '../pages/user/Movie';
 import NewUser from '../pages/user/NewUser';

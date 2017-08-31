@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col} from 'react-bootstrap';
+import { Grid, Row, Col, Button} from 'react-bootstrap';
 import SearchMovies from "../../components/SearchMovies";
 
 class NewUser extends Component {
@@ -8,7 +8,9 @@ class NewUser extends Component {
         super(props);
 
         this.state = {
-            options: [],
+            'movie1' : '',
+            'movie2' : '',
+            'movie3' : '',
         };
     }
 
@@ -21,6 +23,21 @@ class NewUser extends Component {
         document.body.style.background = '#FFF';
     }
 
+    handleChange(name,value){
+        this.setState({
+            ...this.state,
+         [name]: value
+        });
+    }
+    handleSubmit() {
+        if(this.state.movie1 !== '' && this.state.movie2 !== '' && this.state.movie3 !== '') {
+            alert('ok');
+        }
+        else{
+            alert('jbg');
+        }
+    }
+
     render() {
         return (
             <Grid className="auth-page">
@@ -29,11 +46,23 @@ class NewUser extends Component {
                         <section className="auth-form text-center">
                             <div className="start-form">
                                 <h1>Your favorite three movies</h1>
-                                <Row>
+                                <Row className="movie-start-input">
                                     <Col md={8} mdOffset={2}>
-                                        <SearchMovies/>
+                                        <SearchMovies name="movie1" onChange={this.handleChange.bind(this)}/>
                                     </Col>
                                 </Row>
+                                {/*<Row className="movie-start-input">*/}
+                                    {/*<Col md={8} mdOffset={2}>*/}
+                                        {/*<SearchMovies name="movie2" onChange={this.handleChange.bind(this)}/>*/}
+                                    {/*</Col>*/}
+                                {/*</Row>*/}
+                                {/*<Row className="movie-start-input">*/}
+                                    {/*<Col md={8} mdOffset={2}>*/}
+                                        {/*<SearchMovies name="movie3" onChange={this.handleChange.bind(this)}/>*/}
+                                    {/*</Col>*/}
+                                {/*</Row>*/}
+
+                                <Button onClick={this.handleSubmit.bind(this)}>Next</Button>
                             </div>
                         </section>
                     </Col>

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, Col, Grid, Row, Button } from 'react-bootstrap';
-import {NavLink} from 'react-router-dom';
+import { FormGroup, FormControl, Col, Grid, Row, Button, Alert } from 'react-bootstrap';
+import {NavLink, Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+import ReactLoading from 'react-loading';
+import PropTypes from 'prop-types';
 
 import './../css/auth.css';
 import { Validation } from './../functions/Validation';
+import AuthRequest  from '../functions/ajax/AuthRequest';
 
 class Login extends Component {
 
@@ -36,7 +40,12 @@ class Login extends Component {
         return this.state[info]['validate'];
     }
 
-    handleValidation(info, value) {
+    checkIsValidState() {
+        return (this.state.email.validate === 'success' && this.state.password.validate === 'success')
+    }
+
+
+    static handleValidation(info, value) {
         let result = Validation(info, value);
         let validate = null;
         let validateMsg = '';
@@ -55,7 +64,7 @@ class Login extends Component {
     handleChanges(e) {
         let info = e.target.name;
         let newValue = e.target.value;
-        let resultValidation = this.handleValidation(info, newValue);
+        let resultValidation = Login.handleValidation(info, newValue);
         this.setState({
             email    : this.state.email,
             password : this.state.password,
@@ -67,12 +76,25 @@ class Login extends Component {
         });
     }
 
+    submitForm(e) {
+        e.preventDefault();
+        if(this.checkIsValidState()){
+            this.props.loader();
+            this.props.submitForm({
+                email : this.state.email.value,
+                password : this.state.password.value
+            })
+        }
+
+    }
+
     render() {
         return (
             <Grid className="auth-page">
                 <Row>
                     <Col md={6} mdOffset={3}>
                         <section className="auth-form text-center">
+                            {this.props.auth.loader ? <div className="loader-center"><ReactLoading className="loader" type="spin" color="#008491"/></div>: null}
                             <div className="auth-mdb-title">
                                 <h1>
                                     Log In
@@ -81,7 +103,11 @@ class Login extends Component {
                                     to your personal movie book
                                 </h4>
                             </div>
-                            <form>
+                            {
+                                this.props.auth.error !== '' ?
+                                    <Col md={8} mdOffset={2}><Alert bsStyle="danger">{this.props.auth.error}</Alert></Col> : null
+                            }
+                            <form method="POST">
                                 <Row>
                                     <Col md={8} mdOffset={2}>
                                         <FormGroup controlId="email" validationState={this.getValidationState('email')}>
@@ -112,7 +138,7 @@ class Login extends Component {
                                 </Row>
                                 <Row>
                                     <Col md={8} mdOffset={2} className="text-center">
-                                        <Button type="submit" block className="mdb-main-btn">
+                                        <Button type="submit" block className="mdb-main-btn" onClick={this.submitForm.bind(this)}>
                                             Log In
                                         </Button>
                                     </Col>
@@ -128,6 +154,7 @@ class Login extends Component {
                                    </p>
                                 </Col>
                             </Row>
+                            {this.props.auth.redirect ? <Redirect to="/home" /> : null}
                         </section>
                     </Col>
                 </Row>
@@ -136,4 +163,28 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        auth : state.auth
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        submitForm : (data) => {
+            dispatch(AuthRequest(data, 'login'));
+        },
+        loader : () => {
+            dispatch({
+                type : 'LOADER'
+            });
+        }
+    }
+};
+
+Login.propTypes={
+    submitForm : PropTypes.func.isRequired,
+    auth : PropTypes.object.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

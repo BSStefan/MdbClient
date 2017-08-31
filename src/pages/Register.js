@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, Col, Grid, Row, Button } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { FormGroup, FormControl, Col, Grid, Row, Button, Alert } from 'react-bootstrap';
+import { NavLink, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import ReactLoading from 'react-loading';
+import PropTypes from 'prop-types';
 
+import AuthRequest from './../functions/ajax/AuthRequest'
 import './../css/auth.css';
 import { Validation } from './../functions/Validation';
 
@@ -62,7 +66,11 @@ class Register extends Component {
         return [validate, validateMsg];
     }
 
-    handleChanges(e) { console.log(e);
+    checkIsValidState() {
+        return (this.state.email.validate === 'success' && this.state.password.validate === 'success')
+    }
+
+    handleChanges(e) {
         let info = e.target.name;
         let newValue = e.target.value;
         let resultValidation = this.handleValidation(info, newValue);
@@ -79,17 +87,35 @@ class Register extends Component {
         });
     }
 
+    submitForm(e) {
+        e.preventDefault();
+        if(this.checkIsValidState()){
+            this.props.loader();
+            this.props.submitForm({
+                email : this.state.email.value,
+                password : this.state.password.value,
+                first_name : this.state.first_name.value,
+                last_name : this.state.last_name.value,
+            })
+        }
+    }
+
     render() {
         return (
             <Grid className="auth-page">
                 <Row>
                     <Col md={6} mdOffset={3}>
                         <section className="auth-form text-center">
+                            {this.props.auth.loader ? <div className="loader-center"><ReactLoading className="loader" type="spin" color="#008491"/></div>: null}
                             <div className="auth-mdb-title">
                                 <h1>
                                     Register
                                 </h1>
                             </div>
+                            {
+                                this.props.auth.error !== '' ?
+                                    <Col md={8} mdOffset={2}><Alert bsStyle="danger">{this.props.auth.error}</Alert></Col> : null
+                            }
                             <form>
                                 <Row>
                                     <Col md={8} mdOffset={2}>
@@ -149,7 +175,7 @@ class Register extends Component {
                                 </Row>
                                 <Row>
                                     <Col md={8} mdOffset={2} className="text-center">
-                                        <Button type="submit" block className="mdb-main-btn">
+                                        <Button onClick={this.submitForm.bind(this)} type="submit" block className="mdb-main-btn">
                                             Register
                                         </Button>
                                     </Col>
@@ -165,6 +191,7 @@ class Register extends Component {
                                     </p>
                                 </Col>
                             </Row>
+                            {this.props.auth.redirect ? <Redirect to="/start" /> : null}
                         </section>
                     </Col>
                 </Row>
@@ -172,5 +199,28 @@ class Register extends Component {
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        auth : state.auth
+    }
+};
 
-export default Register;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        submitForm : (data) => {
+            dispatch(AuthRequest(data, 'register'));
+        },
+        loader : () => {
+            dispatch({
+                type : 'LOADER'
+            });
+        }
+    }
+};
+
+Register.propTypes={
+    submitForm: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
+

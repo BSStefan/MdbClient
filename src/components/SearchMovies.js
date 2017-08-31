@@ -11,23 +11,22 @@ class SearchMovies extends Component {
             options: [],
         };
     }
-    submit(v){
-        console.log(v);
+
+    change(value){
+        this.props.onChange(this.props.name, value);
     }
 
     render() {
         return (
             <div>
-                <form onSubmit={this.submit.bind(this)}>
                 <AsyncTypeahead
                     {...this.state}
                     labelKey="login"
                     onSearch={this._handleSearch}
                     placeholder="Search for a movie"
                     renderMenuItemChildren={this._renderMenuItemChildren}
-                    onInputChange={this.submit}
+                    onInputChange={this.change.bind(this)}
                 />
-                </form>
             </div>
         );
     }
@@ -45,9 +44,23 @@ class SearchMovies extends Component {
             return;
         }
         fetch(`http://mdb.dev/api/search-movie?movie=${query}`)
-            .then(resp => resp.json())
-            .then(json => this.setState({options: json.data}));
+            .then((response) => {
+                if(response.status >= 400) {
+                    throw new Error("Bad response from server");
+                }
+                return response.json();
+            })
+            .then(json => this.setState({options: json.data}))
+            .catch(this.handleError.bind(this))
+    }
+
+    handleError() {
+        this.setState({
+            options: ['Wrong name']
+        });
+        this.change('');
     }
 }
+
 
 export default SearchMovies;
