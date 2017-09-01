@@ -16,27 +16,33 @@ export const MovieListReducer  = (
     switch(action.type){
         case 'RECOMMENDATION':
             newState = {
-                recommendation : [action.payload],
+                ...newState,
+                recommendation : action.payload,
             };
             return newState;
         case 'NEWMOVIES':
+            console.log('ste');
             newState = {
-                newMovies : [action.payload],
+                ...newState,
+                newMovies : action.payload,
             };
             return newState;
         case 'MOSTPOPULAR':
             newState = {
-                mostPopular : [action.payload],
+                ...newState,
+                mostPopular : action.payload,
             };
             return newState;
         case 'PERGENRE':
             newState = {
-                perGenre : [action.payload],
+                ...newState,
+                perGenre : action.payload,
             };
             return newState;
         case 'CURRENTINCINEMA':
             newState = {
-                currentInCinema : [action.payload],
+                ...newState,
+                currentInCinema : action.payload,
             };
             return newState;
         default:

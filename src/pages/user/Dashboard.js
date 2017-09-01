@@ -3,11 +3,16 @@ import { Grid, Row, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import LoadMovieList from './../../functions/ajax/LoadMovieList';
+import LoadMovieListRequest from '../../functions/ajax/LoadMovieListRequest';
 import SmallMovieList from './../../components/SmallMovieList';
 import SideNavigation from './../../components/SideNavigation';
 
 class Dashboard extends Component {
+    componentWillMount() {
+         this.props.loadNew();
+        // this.props.loadMostPopular();
+    };
+
     render(){
         return (
             <Grid fluid className="dashboard">
@@ -19,15 +24,15 @@ class Dashboard extends Component {
                         <Col sm={12}>
                             <h3><b>Recommendation</b></h3>
                         </Col>
-                        <SmallMovieList/>
+                        <SmallMovieList movies={this.props.listMovies.recommendation} />
                         <Col sm={12}>
                             <h3><b>New movies</b></h3>
                         </Col>
-                        <SmallMovieList/>
+                        <SmallMovieList movies={this.props.listMovies.newMovies} />
                         <Col sm={12}>
                             <h3><b>Most popular</b></h3>
                         </Col>
-                        <SmallMovieList/>
+                        <SmallMovieList movies={this.props.listMovies.mostPopular} />
                     </Col>
                 </Row>
             </Grid>
@@ -43,13 +48,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadRecommendation : () => {
-            dispatch(LoadMovieList('recommendation', 12));
+            dispatch(LoadMovieListRequest('recommendation', 12));
         },
         loadNew : () => {
-            dispatch(LoadMovieList('new-movies', 12));
+            dispatch(LoadMovieListRequest('new-movies', 12));
         },
         loadMostPopular : () => {
-            dispatch(LoadMovieList('most-liked', 12));
+            dispatch(LoadMovieListRequest('most-liked', 12));
         }
     }
 };

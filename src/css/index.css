@@ -164,3 +164,6 @@ body {
   z-index: 2;
   width: 100px;
 }
+.small-movie-reaction. .btn-default{
+  border-color: transparent !important;
+}

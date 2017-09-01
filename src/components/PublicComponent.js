@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-export default  function PublicComponent ({component: Component, isAuth, ...rest}) {
+export default function PublicComponent ({component: Component, isAuth, ...rest}) {
     return (
         <Route
             {...rest}
