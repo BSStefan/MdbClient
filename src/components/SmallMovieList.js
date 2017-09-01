@@ -26,8 +26,6 @@ class SmallMovieList extends Component {
                     <Col sm={2}>
                         <SmallMovie/>
                     </Col>
-                </Row>
-                <Row>
                     <Col sm={2}>
                         <SmallMovie/>
                     </Col>

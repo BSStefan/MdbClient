@@ -103,6 +103,7 @@ class Register extends Component {
     render() {
         return (
             <Grid className="auth-page">
+                {this.props.auth.isAuth ? <Redirect to="/home"/> : null}
                 <Row>
                     <Col md={6} mdOffset={3}>
                         <section className="auth-form text-center">

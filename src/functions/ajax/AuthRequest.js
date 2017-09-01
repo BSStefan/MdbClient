@@ -1,14 +1,19 @@
-import React from 'react';
 import axios from 'axios';
+
+import setTokenInRequest from './../setTokenInRequest';
 
 export default function AuthRequest(data, route) {
     return dispatch => {
         axios.post('http://mdb.dev/api/auth/mdb/'+route, data)
             .then((response) => {
                 if(response.data.error === false){
+                    localStorage.setItem('jwtToken', response.data.data.token);
+                    localStorage.setItem('name', response.data.data.first_name+'/'+response.data.data.last_name);
+                    setTokenInRequest(localStorage.getItem('jwtToken'));
                     dispatch({
                         type : 'LOGIN',
                         payload: {
+                            'token' : response.data.data.token,
                             'first_name' : response.data.data.first_name,
                             'last_name' : response.data.data.last_name
                         }

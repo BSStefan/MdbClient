@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AsyncTypeahead} from 'react-bootstrap-typeahead';
 
-var Typeahead = require('react-bootstrap-typeahead').Typeahead;
+// var Typeahead = require('react-bootstrap-typeahead').Typeahead;
 
 class SearchMovies extends Component {
 
