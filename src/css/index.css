@@ -66,6 +66,7 @@ body {
 .small-image{
   width: 100%;
   max-height: 300px;
+  min-height: 150px;
 }
 .dashboard{
   margin-top: 100px;
@@ -87,6 +88,7 @@ body {
   color: #c4c4c4;
   margin-left: 5px;
   margin-right: 5px;
+  min-height: 50px;
 }
 .small-movie-reaction{
   min-height: 20px;
@@ -97,6 +99,7 @@ body {
   background-color: #fff;
   opacity: 0.5;
   width: 100%;
+  min-height: 45%;
 }
 .small-movie-about:hover{
   opacity: 0.8;
@@ -164,6 +167,40 @@ body {
   z-index: 2;
   width: 100px;
 }
-.small-movie-reaction. .btn-default{
+.small-movie-reaction .btn-default, .large-movie-reaction .btn-default{
   border-color: transparent !important;
+}
+.small-movie-reaction .btn-default:hover, .small-movie-reaction .btn-default:focus, .large-movie-reaction .btn-default:hover, .large-movie-reaction .btn-default:focus{
+  background-color: transparent !important;
+  color: #000;
+}
+.small-movie-tags{
+  margin-bottom: 0px ;
+}
+.link-small-movie, .link-small-movie span{
+  color: #000000;
+}
+.link-small-movie:hover {
+  color: #000000;
+}
+.reaction-active.small-movie-like {
+  color: #008491;
+}
+.reaction-active.small-movie-dislike{
+  color: #C70039;
+}
+.btn:focus {
+  outline: none;
+}
+.btn:active.btn:focus{
+  outline: none;
+}
+.large-movie-reaction{
+
+}
+.large-watch-btn {
+  color: #008491;
+}
+.large-watch-btn:hover, .large-watch-btn:focus {
+  color: #007991 !important;
 }

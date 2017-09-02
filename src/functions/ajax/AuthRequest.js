@@ -13,9 +13,9 @@ export default function AuthRequest(data, route) {
                     dispatch({
                         type : 'LOGIN',
                         payload: {
-                            'token' : response.data.data.token,
-                            'first_name' : response.data.data.first_name,
-                            'last_name' : response.data.data.last_name
+                            token : response.data.data.token,
+                            first_name : response.data.data.first_name,
+                            last_name : response.data.data.last_name
                         }
                     });
                 }

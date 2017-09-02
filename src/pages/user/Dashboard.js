@@ -9,8 +9,8 @@ import SideNavigation from './../../components/SideNavigation';
 
 class Dashboard extends Component {
     componentWillMount() {
-         this.props.loadNew();
-        // this.props.loadMostPopular();
+         //this.props.loadNew();
+         this.props.loadMostPopular();
     };
 
     render(){
@@ -24,15 +24,15 @@ class Dashboard extends Component {
                         <Col sm={12}>
                             <h3><b>Recommendation</b></h3>
                         </Col>
-                        <SmallMovieList movies={this.props.listMovies.recommendation} />
+                        <SmallMovieList movies={this.props.listMovies.recommendation} filter="recommendation" />
                         <Col sm={12}>
                             <h3><b>New movies</b></h3>
                         </Col>
-                        <SmallMovieList movies={this.props.listMovies.newMovies} />
+                        <SmallMovieList movies={this.props.listMovies.newMovies} filter="newMovies" />
                         <Col sm={12}>
                             <h3><b>Most popular</b></h3>
                         </Col>
-                        <SmallMovieList movies={this.props.listMovies.mostPopular} />
+                        <SmallMovieList movies={this.props.listMovies.mostPopular} filter="mostPopular" />
                     </Col>
                 </Row>
             </Grid>

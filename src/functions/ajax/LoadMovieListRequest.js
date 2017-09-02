@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export default function LoadMovieListRequest(route, number) {
     let action;
     switch(route){
@@ -20,7 +19,6 @@ export default function LoadMovieListRequest(route, number) {
         axios.get('http://mdb.dev/api/user/'+route+'/'+number)
             .then((response) => {
                 if(response.data.error === false){
-                    console.log(response.data.data.movies)
                     dispatch({
                         type : action,
                         payload : response.data.data.movies
