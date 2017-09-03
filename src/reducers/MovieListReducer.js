@@ -5,44 +5,52 @@ export const MovieListReducer  = (
         mostPopular : [],
         perGenre : [],
         currentInCinema : [],
+        pagination : {}
     }, action) => {
     let newState = {
         recommendation : [...state.recommendation],
         newMovies : [...state.newMovies],
         mostPopular : [...state.mostPopular],
         perGenre : [...state.perGenre],
-        currentInCinema : [...state.currentInCinema]
+        currentInCinema : [...state.currentInCinema],
+        pagination : {
+            ...state.pagination
+        }
     };
     switch(action.type){
         case 'RECOMMENDATION':
             newState = {
                 ...newState,
-                recommendation : action.payload,
+                recommendation : action.payload[0],
+                pagination: action.payload[1]
             };
             return newState;
         case 'NEWMOVIES':
-            console.log('ste');
             newState = {
                 ...newState,
-                newMovies : action.payload,
+                newMovies : action.payload[0],
+                pagination: action.payload[1]
             };
             return newState;
         case 'MOSTPOPULAR':
             newState = {
                 ...newState,
-                mostPopular : action.payload,
+                mostPopular : action.payload[0],
+                pagination: action.payload[1]
             };
             return newState;
         case 'PERGENRE':
             newState = {
                 ...newState,
-                perGenre : action.payload,
+                perGenre : action.payload[0],
+                pagination: action.payload[1]
             };
             return newState;
         case 'CURRENTINCINEMA':
             newState = {
                 ...newState,
-                currentInCinema : action.payload,
+                currentInCinema : action.payload[0],
+                pagination: action.payload[1]
             };
             return newState;
         case 'LIKE':
@@ -52,7 +60,8 @@ export const MovieListReducer  = (
                 action.payload.likes,
                 action.payload.dislikes,
                 action.payload.liked,
-                action.payload.disliked
+                action.payload.disliked,
+                action.payload.list === 'mostPopular'
             );
 
             newState = {
@@ -67,7 +76,8 @@ export const MovieListReducer  = (
                 action.payload.likes,
                 action.payload.dislikes,
                 action.payload.liked,
-                action.payload.disliked
+                action.payload.disliked,
+                action.payload.list === 'mostPopular'
             );
 
             newState = {
@@ -79,7 +89,7 @@ export const MovieListReducer  = (
     }
 };
 
-const handleReaction = (oldState, movieId, numberOfLikes, numberOfDislikes, liked, disliked ) => {
+const handleReaction = (oldState, movieId, numberOfLikes, numberOfDislikes, liked, disliked, sort ) => {
     let newState = [...oldState];
 
     newState.map((movie) => {
@@ -91,15 +101,17 @@ const handleReaction = (oldState, movieId, numberOfLikes, numberOfDislikes, like
             }
             return movie;
     });
+    if(sort){
+        newState.sort(function (a, b) {
+            if(a['movie']['likes'] < b['movie']['likes']){
+                return 1;
+            }
+            else{
+                return -1;
+            }
+        });
+    }
 
-    newState.sort(function (a, b) {
-        if(a['movie']['likes'] < b['movie']['likes']){
-            return 1;
-        }
-        else{
-            return -1;
-        }
-    });
     return newState;
 };
 

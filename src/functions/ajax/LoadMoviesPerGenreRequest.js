@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function LoadMovieListRequest(route, number, page=1) {
+export default function LoadMoviesPerGenreRequest(route, number, page=1) {
     let action;
     switch(route){
         case 'new-movies':
@@ -32,7 +32,7 @@ export default function LoadMovieListRequest(route, number, page=1) {
                 }
             })
             .catch((error) => {
-            console.log(error);
+                console.log(error);
                 dispatch({
                     type : 'NEWMOVIES',
                     payload : 'tekst'

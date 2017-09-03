@@ -59,7 +59,6 @@ export default function UserReactionRequest(object, list) {
                 }
             })
             .catch((error) => {
-                console.log(error);
                 dispatch({
                     type : 'REACTIONERROR',
                     payload : 'Something is wrong, please try again'

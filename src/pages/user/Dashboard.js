@@ -9,16 +9,19 @@ import SideNavigation from './../../components/SideNavigation';
 
 class Dashboard extends Component {
     componentWillMount() {
-         //this.props.loadNew();
+         this.props.loadNew();
          this.props.loadMostPopular();
     };
+    handleNewMovies(type) {
+        this.props.loadMovies(type, 1);
+    }
 
     render(){
         return (
             <Grid fluid className="dashboard">
                 <Row>
                     <Col sm={2}>
-                        <SideNavigation/>
+                        <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)} />
                     </Col>
                     <Col sm={10} className="movie-small-list">
                         <Col sm={12}>
@@ -47,6 +50,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        loadMovies : (type, page) => {
+            dispatch(LoadMovieListRequest(type, 24, page));
+        },
         loadRecommendation : () => {
             dispatch(LoadMovieListRequest('recommendation', 12));
         },

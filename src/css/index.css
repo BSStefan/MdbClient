@@ -204,3 +204,6 @@ body {
 .large-watch-btn:hover, .large-watch-btn:focus {
   color: #007991 !important;
 }
+.movie-one a {
+  color: #008491;
+}

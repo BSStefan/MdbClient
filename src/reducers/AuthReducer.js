@@ -4,23 +4,36 @@ export const AuthReducer  = (
         redirect: false,
         user: {},
         error : '',
-        loader : false
+        loader : false,
+        movies : false,
+        movies_redirect : false
     }, action) => {
         let newState = {
-            isAuth : false,
-            redirect : false,
-            error : '',
-            user : {},
-            loader : false
+            ...state,
+            user : {
+                ...state.user
+            }
         };
         switch(action.type){
             case 'LOGIN':
+                let movies = state.movies;
+                let movies_redirect = state.movies_redirect;
+                if(action.payload.action === 'register') {
+                    movies = false;
+                    movies_redirect = false;
+                }
                 newState = {
                     isAuth : true,
                     redirect : true,
-                    user : action.payload,
+                    user : {
+                        token : action.payload.token,
+                        first_name : action.payload.first_name,
+                        last_name : action.payload.last_name,
+                    },
                     error : '',
-                    loader : false
+                    loader : false,
+                    movies : movies,
+                    movies_redirect : movies_redirect
                 };
                 return newState;
             case 'ERROR': {
@@ -29,7 +42,9 @@ export const AuthReducer  = (
                     redirect : false,
                     user : {},
                     error : action.payload,
-                    loader : false
+                    loader : false,
+                    movies : true,
+                    movies_redirect : true
                 };
                 return newState;
             }
@@ -39,16 +54,22 @@ export const AuthReducer  = (
                     redirect : false,
                     user : {},
                     error : '',
-                    loader : false
+                    loader : false,
+                    movies : false,
+                    movies_redirect : false
                 };
                 return newState;
             case 'LOADER':
                 newState = {
-                    isAuth : false,
-                    redirect : false,
-                    user : {},
-                    error : '',
+                    ...newState,
                     loader : true
+                };
+                return newState;
+            case 'SET_FAVORITE_REGISTER' :
+                newState = {
+                    ...newState,
+                    movies : true,
+                    movies_redirect : true
                 };
                 return newState;
             default:

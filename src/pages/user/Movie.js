@@ -15,10 +15,9 @@ class Movie extends Component {
         const movieId = parseInt(this.props.match.params.id, 10);
         this.props.loadMovie(movieId);
     }
-    constructor(props) {
-        super(props);
+    componentWillUnmount() {
+        this.props.destroyMovie();
     }
-
     handleLikeDislike(action, id) {
         this.props.likeDislike(action, id);
     }
@@ -70,6 +69,11 @@ const mapDispatchToProps = (dispatch) => {
         watchedOrToBe : (action, id) => {
             dispatch(WatchOrToBeWatchedRequest(action, id));
         },
+        destroyMovie : () => {
+            dispatch({
+                type : 'DESTROY_ONE'
+            });
+        }
 
     }
 };

@@ -30,20 +30,20 @@ class MovieDetails extends Component {
                     </p>
                     <p>
                         <span><b>Director:</b> </span>
-                        <NavLink exact to="#">{this.props.details.director[this.props.details.details.director_id]}</NavLink>
+                        <NavLink exact to={"/person/director/"+ this.props.details.details.director_id}>{this.props.details.director[this.props.details.details.director_id]}</NavLink>
                     </p>
                     <p>
                         <span><b>Writers:</b> </span>
                         {this.props.details.writers.map((writer, i) =>
-                            <NavLink exact to="#" key={writer.id}> {writer.name}
+                            <NavLink exact to={"/person/writer/"+writer.id} key={writer.id}> {writer.name}
                                 {i<this.props.details.writers.length-1 ?  ',' : ' '}
                             </NavLink>
                         )}
                     </p>
                     <p>
                         <span><b>Actors:</b> </span>
-                        {this.props.details.actors.map((writer, i) =>
-                            <NavLink exact to="#" key={writer.id}> {writer.name}
+                        {this.props.details.actors.map((actor, i) =>
+                            <NavLink exact to={"/person/actor/"+actor.id} key={actor.id}> {actor.name}
                                 {i<this.props.details.actors.length-1 ?  ',' : ' '}
                             </NavLink>
                         )}
@@ -60,7 +60,7 @@ class MovieDetails extends Component {
                     </p>
                     <p>
                         <span><b>Homepage:</b> </span>
-                        <NavLink exact to="#">{this.props.details.details.homepage}</NavLink>
+                        <a href={this.props.details.details.homepage} target="_blank">{this.props.details.details.homepage}</a>
                     </p>
                     <p>
                         <span><b>Runtime:</b> {this.props.details.details.runtime} minutes</span>

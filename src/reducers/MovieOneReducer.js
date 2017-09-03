@@ -38,6 +38,26 @@ export const MovieOneReducer  = (
                 movie        : action.payload.movie
             };
             return newState;
+        case 'DESTROY_ONE':
+            newState={
+                movie : {
+                    details  : {},
+                    director : [],
+                    actors   : [],
+                    writers  : [],
+                    genres   : [],
+                    keywords : [],
+                    likes    : 0,
+                    dislikes : 0
+                },
+                userReaction  : {
+                    liked     : false,
+                    disliked  : false,
+                    watched   : false,
+                    watchlist : false
+                }
+            };
+            return newState;
         case 'LIKE_ONE_MOVIE':
             newState = {
                 ...newState,

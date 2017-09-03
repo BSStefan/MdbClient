@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 SmallMovieList.propTypes={
-    listMovies: PropTypes.object.isRequired,
+    movies: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SmallMovieList);

@@ -20,6 +20,7 @@ class Register extends Component {
         document.body.style.background = '#FFF';
     }
 
+
     constructor(props) {
         super(props);
         this.state={
@@ -103,7 +104,6 @@ class Register extends Component {
     render() {
         return (
             <Grid className="auth-page">
-                {this.props.auth.isAuth ? <Redirect to="/home"/> : null}
                 <Row>
                     <Col md={6} mdOffset={3}>
                         <section className="auth-form text-center">
@@ -220,7 +220,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 Register.propTypes={
-    submitForm: PropTypes.func.isRequired
+    submitForm : PropTypes.func.isRequired,
+    auth : PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

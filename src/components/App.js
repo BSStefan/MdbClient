@@ -11,8 +11,12 @@ import Dashboard from './../pages/user/Dashboard';
 import Movie from './../pages/user/Movie';
 import NewUser from './../pages/user/NewUser';
 import Logout from './../pages/Logout';
-import PrivateComponent from './PrivateComponent'
-import PublicComponent from './PublicComponent'
+import MovieList from './../pages/user/MovieList';
+import Person from './../pages/user/Person';
+import AllGenres from './../pages/user/AllGenres';
+import PrivateComponent from './PrivateComponent';
+import RegisterGuard from './RegisterGuard';
+import PublicComponent from './PublicComponent';
 
 
 class App extends Component {
@@ -26,8 +30,8 @@ class App extends Component {
                   <section>
                       <Navigation/>
                       <Switch>
-                          <PublicComponent isAuth={this.props.auth.isAuth} exact path="/login" component={Login}/>
-                          <PublicComponent isAuth={this.props.auth.isAuth} exact path="/register" component={Register}/>
+                          <PublicComponent  isAuth={this.props.auth.isAuth} exact path="/login" component={Login}/>
+                          <RegisterGuard    isAuth={this.props.auth.isAuth} isField={this.props.auth.movie} exact path="/register" component={Register}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/logout" component={Logout}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/home" component={Dashboard}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/movie/:id" component={Movie}/>
@@ -35,6 +39,12 @@ class App extends Component {
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/watchlist" component={Dashboard}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/profile" component={Dashboard}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/start" component={NewUser}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/person/:role/:id" component={Person}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/most-liked/:page" component={MovieList}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/new-movies/:page" component={MovieList}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/current-in-cinema/:page" component={MovieList}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/per-genre/:genre_id/:page" component={MovieList}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/all-genres" component={AllGenres}/>
                           <Route component={NotFound}/>
                       </Switch>
                   </section>
@@ -54,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
     return {}
 };
 
-Register.propTypes={
+App.propTypes={
     auth: PropTypes.object.isRequired
 };
 

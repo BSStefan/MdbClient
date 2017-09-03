@@ -9,6 +9,7 @@ class SearchMovies extends Component {
         super(props);
         this.state = {
             options: [],
+            minLength: 3,
         };
     }
 
@@ -26,6 +27,7 @@ class SearchMovies extends Component {
                     placeholder="Search for a movie"
                     renderMenuItemChildren={this._renderMenuItemChildren}
                     onInputChange={this.change.bind(this)}
+                    minLengt
                 />
             </div>
         );
@@ -40,9 +42,6 @@ class SearchMovies extends Component {
     }
 
     _handleSearch = query => {
-        if (!query || query.length<3) {
-            return;
-        }
         fetch(`http://mdb.dev/api/search-movie?movie=${query}`)
             .then((response) => {
                 if(response.status >= 400) {

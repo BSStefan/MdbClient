@@ -8,13 +8,21 @@ import jwtDecode from 'jwt-decode';
 import { AuthReducer } from './reducers/AuthReducer';
 import { MovieListReducer } from './reducers/MovieListReducer';
 import { MovieOneReducer } from './reducers/MovieOneReducer';
+import { PersonReducer } from './reducers/PersonReducer';
+import { GenresReducer } from './reducers/GenresReducer';
 import './css/index.css';
 import App from './components/App';
 import setTokenInRequest from './functions/setTokenInRequest';
 import LogOut from './functions/LogOut';
 
 const store=createStore(
-    combineReducers({ auth: AuthReducer, listMovies: MovieListReducer, oneMovie : MovieOneReducer }),
+    combineReducers({
+        auth: AuthReducer,
+        listMovies: MovieListReducer,
+        oneMovie : MovieOneReducer,
+        person : PersonReducer,
+        genres : GenresReducer
+    }),
     {},
     compose(applyMiddleware(thunk), window.devToolsExtension ? window.devToolsExtension() : f => f));
 

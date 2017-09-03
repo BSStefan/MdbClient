@@ -15,8 +15,8 @@ class SmallMovie extends Component {
         return (
             <div className="small-movie">
                 <Link to={"/movie/"+this.props.id} className="link-small-movie">
-                    {/*<img className="small-image" src="http://mdb.dev/api/image?name=proba.jpg" alt="Movie"/>*/}
-                    <img className="small-image" src={"http://mdb.dev/api/image?name="+this.props.image} alt="Movie"/>
+                    <img className="small-image" src="http://mdb.dev/api/image?name=proba.jpg" alt="Movie"/>
+                    {/*<img className="small-image" src={"http://mdb.dev/api/image?name="+this.props.image} alt="Movie"/>*/}
                 </Link>
                 <div className="small-movie-about">
                     <p className="small-movie-title">{this.props.title}</p>

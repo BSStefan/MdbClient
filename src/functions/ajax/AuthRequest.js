@@ -15,7 +15,8 @@ export default function AuthRequest(data, route) {
                         payload: {
                             token : response.data.data.token,
                             first_name : response.data.data.first_name,
-                            last_name : response.data.data.last_name
+                            last_name : response.data.data.last_name,
+                            action : route
                         }
                     });
                 }
