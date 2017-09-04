@@ -15,13 +15,16 @@ class Dashboard extends Component {
     handleNewMovies(type) {
         this.props.loadMovies(type, 1);
     }
+    handleNewUserMovies(type) {
+        //this.props.loadUserMovies(type, 1);
+    }
 
     render(){
         return (
             <Grid fluid className="dashboard">
                 <Row>
                     <Col sm={2}>
-                        <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)} />
+                        <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)} loadNewUserMovies={(t) => this.handleNewUserMovies(t)} />
                     </Col>
                     <Col sm={10} className="movie-small-list">
                         <Col sm={12}>

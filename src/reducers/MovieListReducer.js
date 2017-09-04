@@ -39,14 +39,14 @@ export const MovieListReducer  = (
                 pagination: action.payload[1]
             };
             return newState;
-        case 'PERGENRE':
+        case 'PER_GENRE':
             newState = {
                 ...newState,
                 perGenre : action.payload[0],
                 pagination: action.payload[1]
             };
             return newState;
-        case 'CURRENTINCINEMA':
+        case 'CURRENT_IN_CINEMA':
             newState = {
                 ...newState,
                 currentInCinema : action.payload[0],

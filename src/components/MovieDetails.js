@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Button, Glyphicon } from 'react-bootstrap';
+import { Col, Button, Glyphicon, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -74,6 +74,37 @@ class MovieDetails extends Component {
                     <p>
                         <span><b>Current in cinema:</b> {this.props.details.details.in_cinema ? 'Yes' : 'No'}</span>
                     </p>
+                    {
+                        this.props.details.details.in_cinema ?
+                            <p><Button onClick={() => this.props.findProjections()}>Find projections</Button></p> :
+                            null
+                    }
+                    {
+                        this.props.projections.length !== 0 ?
+                            <Col>
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th>Cinema</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Room</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {this.props.projections.map((projection) =>
+                                        <tr key={projection.id}>
+                                            <td>{projection.name}</td>
+                                            <td>{projection.date}</td>
+                                            <td>{projection.time}</td>
+                                            <td>{projection.room}</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </Table>
+                                <Button onClick={this.props.destroyListProjections}>Close</Button>
+                            </Col>: null
+                    }
                     <p className="large-movie-reaction">
                         <Button onClick={() => this.likeDislike('like')}>
                             <Glyphicon glyph="thumbs-up" className={this.props.userReaction.liked ? "reaction-active small-movie-like" :"small-movie-like"}/>
@@ -103,8 +134,10 @@ class MovieDetails extends Component {
 MovieDetails.PropTypes = {
     likeDislike: PropTypes.func.isRequired,
     addTowWatchlist: PropTypes.func.isRequired,
+    findProjections: PropTypes.func.isRequired,
     addToWatched: PropTypes.func.isRequired,
     details: PropTypes.object.isRequired,
-    userReaction: PropTypes.object.isRequired
+    userReaction: PropTypes.object.isRequired,
+    destroyListProjections: PropTypes.func.isRequired
 };
 export default MovieDetails;

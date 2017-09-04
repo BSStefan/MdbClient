@@ -14,6 +14,7 @@ import Logout from './../pages/Logout';
 import MovieList from './../pages/user/MovieList';
 import Person from './../pages/user/Person';
 import AllGenres from './../pages/user/AllGenres';
+import UserLists from './../pages/user/UserLists';
 import PrivateComponent from './PrivateComponent';
 import RegisterGuard from './RegisterGuard';
 import PublicComponent from './PublicComponent';
@@ -35,8 +36,8 @@ class App extends Component {
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/logout" component={Logout}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/home" component={Dashboard}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/movie/:id" component={Movie}/>
-                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/movies" component={Dashboard}/>
-                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/watchlist" component={Dashboard}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/liked-movies/:page" component={UserLists}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/watchlist/:page" component={UserLists}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/profile" component={Dashboard}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/start" component={NewUser}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/person/:role/:id" component={Person}/>

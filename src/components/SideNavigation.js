@@ -21,6 +21,12 @@ class SideNavigation extends Component {
                     <LinkContainer to="/all-genres">
                         <NavItem eventKey={4}>Genres</NavItem>
                     </LinkContainer>
+                    <LinkContainer to="/liked-movies/1" onClick={() => this.props.loadNewUserMovies('liked-movies')}>
+                        <NavItem eventKey={4}>Your movies</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/watchlist/1" onClick={() => this.props.loadNewUserMovies('watchlist')}>
+                        <NavItem eventKey={4}>Your Watchlist</NavItem>
+                    </LinkContainer>
                     <LinkContainer to="/current-in-cinema/1" onClick={() => this.props.loadNewMovies('current-in-cinema')}>
                         <NavItem eventKey={4}>Current in cinema</NavItem>
                     </LinkContainer>

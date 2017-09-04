@@ -15,7 +15,8 @@ export const MovieOneReducer  = (
            disliked  : false,
            watched   : false,
            watchlist : false
-       }
+       },
+        cinemaDetails : []
     }, action) => {
     let newState = {
         userReaction : {
@@ -29,13 +30,25 @@ export const MovieOneReducer  = (
             writers  : [...state.movie.writers],
             genres   : [...state.movie.genres],
             keywords : [...state.movie.keywords]
-        }
+        },
+        cinemaDetails: [
+            ...state.cinemaDetails
+        ]
     };
     switch(action.type){
         case 'LOAD_ONE':
             newState = {
                 userReaction : action.payload.userReaction,
-                movie        : action.payload.movie
+                movie        : action.payload.movie,
+                cinemaDetails: [
+                    ...newState.cinemaDetails
+                ]
+            };
+            return newState;
+        case 'LOAD_CINEMA':
+            newState = {
+                ...newState,
+                cinemaDetails : action.payload.cinemaDetails
             };
             return newState;
         case 'DESTROY_ONE':
@@ -55,7 +68,8 @@ export const MovieOneReducer  = (
                     disliked  : false,
                     watched   : false,
                     watchlist : false
-                }
+                },
+                cinemaDetails: []
             };
             return newState;
         case 'LIKE_ONE_MOVIE':
@@ -79,6 +93,9 @@ export const MovieOneReducer  = (
 
             return newState;
         case 'WATCHLIST_ONE_MOVIE':
+            newState = {
+                ...newState,
+            };
             newState['userReaction']['watched'] = action.payload.already_watched;
             newState['userReaction']['watchlist'] = action.payload.to_be_watched;
             return newState;

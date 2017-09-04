@@ -204,6 +204,13 @@ body {
 .large-watch-btn:hover, .large-watch-btn:focus {
   color: #007991 !important;
 }
-.movie-one a {
+.movie-one a, .user-movies a {
   color: #008491;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  background: white;
+  color: #c4c4c4;
+}
+.user-movies{
+  margin-top: 55px;
 }

@@ -37,21 +37,21 @@ class Navigation extends Component{
                                         </NavItem>
                                     </LinkContainer>
                             }
-                            {
-                                this.props.auth.isAuth ?
-                                    <NavDropdown eventKey={0} title="User" id="basic-nav-dropdown">
-                                        <LinkContainer to="/movies">
-                                        <MenuItem eventKey={3}>Your Movies</MenuItem>
-                                        </LinkContainer>
-                                        <LinkContainer to="/watchlist">
-                                        <MenuItem eventKey={4}>Your Watchlist</MenuItem>
-                                        </LinkContainer>
-                                        <LinkContainer to="/profile">
-                                        <MenuItem eventKey={5}>Your Profile</MenuItem>
-                                        </LinkContainer>
-                                    </NavDropdown>
-                                    : null
-                            }
+                            {/*{*/}
+                                {/*this.props.auth.isAuth ?*/}
+                                    {/*<NavDropdown eventKey={0} title="User" id="basic-nav-dropdown">*/}
+                                        {/*<LinkContainer to="/liked-movies/1">*/}
+                                        {/*<MenuItem eventKey={3}>Your Movies</MenuItem>*/}
+                                        {/*</LinkContainer>*/}
+                                        {/*<LinkContainer to="/watchlist/1">*/}
+                                        {/*<MenuItem eventKey={4}>Your Watchlist</MenuItem>*/}
+                                        {/*</LinkContainer>*/}
+                                        {/*/!*<LinkContainer to="/profile">*!/*/}
+                                        {/*/!*<MenuItem eventKey={5}>Your Profile</MenuItem>*!/*/}
+                                        {/*/!*</LinkContainer>*!/*/}
+                                    {/*</NavDropdown>*/}
+                                    {/*: null*/}
+                            {/*}*/}
                             {
                                 this.props.auth.isAuth ?
                                     <LinkContainer to="/logout">

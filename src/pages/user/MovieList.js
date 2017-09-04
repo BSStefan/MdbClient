@@ -12,7 +12,14 @@ import SideNavigation from './../../components/SideNavigation';
 class MovieList extends Component {
     componentWillMount() {
         let page = parseInt(this.props.match.params.page, 10);
-        this.props.loadMovies(this.getType(), page);
+        let type = this.getType();
+        if(type === 'per-genre'){
+            this.props.loadMovies(this.getType(), page, this.props.match.params.genre_id);
+        }
+        else{
+            this.props.loadMovies(this.getType(), page);
+        }
+
     };
     getType(){
         return window.location.pathname.split('/')[1];
@@ -26,38 +33,46 @@ class MovieList extends Component {
             case 'recommendation':
                 return ['recommendation', 'Recommendation'];
             case 'current-in-cinema':
-                return ['currentInCinema', 'Current In Cinema']
+                return ['currentInCinema', 'Current In Cinema'];
+            case 'per-genre':
+                return ['perGenre', 'Per Genre']
         }
     }
     handleRedirect(page) {
-        this.props.loadMovies(this.getType(), page);
+        let type = this.getType();
+        if(type === 'per-genre'){
+            this.props.loadMovies(this.getType(), page, this.props.match.params.genre_id);
+        }
+        else{
+            this.props.loadMovies(type, page);
+        }
     }
     handleNewMovies(type) {
         this.props.loadMovies(type, 1);
     }
     makeNewLinks(){
         let page = parseInt(this.props.match.params.page, 10);
-        let prev = '';
-        let next = '';
         let type = this.getType();
-        prev = '/'+type+'/'+(page-1);
-        next = '/'+type+'/'+(page+1);
+        if(type === 'per-genre'){
+            type = type + '/' + this.props.match.params.genre_id;
+        }
+        let prev = '/'+type+'/'+(page-1);
+        let next = '/'+type+'/'+(page+1);
         return [prev,next];
     }
     makeNewPage(){
         let page = parseInt(this.props.match.params.page, 10);
-        let prev = '';
-        let next = '';
-        prev = (page-1);
-        next = (page+1);
+        let prev = (page-1);
+        let next = (page+1);
         return [prev,next];
     }
+    handleNewUserMovies() {}
     render(){
         return (
             <Grid fluid className="dashboard">
                 <Row>
                     <Col sm={2}>
-                        <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)}/>
+                        <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)} loadNewUserMovies={(t) => this.handleNewUserMovies(t)}/>
                     </Col>
                     <Col sm={10} className="movie-small-list">
                         <Col sm={12}>
@@ -94,8 +109,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadMovies : (type, page) => {
-            dispatch(LoadMovieListRequest(type, 24, page));
+        loadMovies : (type, page, genreId=0) => {
+            dispatch(LoadMovieListRequest(type, 24, page, genreId));
         },
     }
 };

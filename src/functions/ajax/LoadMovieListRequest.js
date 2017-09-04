@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function LoadMovieListRequest(route, number, page=1) {
+export default function LoadMovieListRequest(route, number, page=1, genres=0) {
     let action;
     switch(route){
         case 'new-movies':
@@ -11,6 +11,13 @@ export default function LoadMovieListRequest(route, number, page=1) {
             break;
         case 'recommendation':
             action = 'RECOMMENDATION';
+            break;
+        case 'per-genre':
+            action = 'PER_GENRE';
+            route = route+'/'+genres;
+            break;
+        case 'current-in-cinema':
+            action = 'CURRENT_IN_CINEMA';
             break;
         default:
             action = '';

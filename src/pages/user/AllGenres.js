@@ -17,14 +17,15 @@ class AllGenres extends Component {
     handleNewMovies(type) {
         this.props.loadMovies(type, 1);
     }
+    handleNewUserMovies() {}
     render(){
         return (
             <Grid fluid className="dashboard">
                 <Row>
                     <Col sm={2}>
-                        <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)}/>
+                        <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)} loadNewUserMovies={(t) => this.handleNewUserMovies(t)}/>
                     </Col>
-                    <Col sm={6} smOffset={2} className="movie-one">
+                    <Col sm={9} smOffset={1} className="movie-one">
                         <ListGroup>
                         {this.props.genres.genres.map((genre) =>
                             <ListGroupItem key={genre['id']}>

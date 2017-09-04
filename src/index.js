@@ -10,6 +10,8 @@ import { MovieListReducer } from './reducers/MovieListReducer';
 import { MovieOneReducer } from './reducers/MovieOneReducer';
 import { PersonReducer } from './reducers/PersonReducer';
 import { GenresReducer } from './reducers/GenresReducer';
+import { UserMoviesReducer } from './reducers/UserMoviesReducer';
+import { MovieProjections } from './reducers/MovieProjections';
 import './css/index.css';
 import App from './components/App';
 import setTokenInRequest from './functions/setTokenInRequest';
@@ -21,7 +23,9 @@ const store=createStore(
         listMovies: MovieListReducer,
         oneMovie : MovieOneReducer,
         person : PersonReducer,
-        genres : GenresReducer
+        genres : GenresReducer,
+        userMovieList : UserMoviesReducer,
+        projections : MovieProjections
     }),
     {},
     compose(applyMiddleware(thunk), window.devToolsExtension ? window.devToolsExtension() : f => f));
