@@ -8,7 +8,7 @@ export default function AuthRequest(data, route) {
             .then((response) => {
                 if(response.data.error === false){
                     localStorage.setItem('jwtToken', response.data.data.token);
-                    localStorage.setItem('name', response.data.data.first_name+'/'+response.data.data.last_name);
+                    localStorage.setItem('name', response.data.data.first_name+'/'+response.data.data.last_name+'/'+response.data.data.is_admin);
                     setTokenInRequest(localStorage.getItem('jwtToken'));
                     dispatch({
                         type : 'LOGIN',
@@ -16,6 +16,7 @@ export default function AuthRequest(data, route) {
                             token : response.data.data.token,
                             first_name : response.data.data.first_name,
                             last_name : response.data.data.last_name,
+                            is_admin : response.data.data.is_admin,
                             action : route
                         }
                     });
@@ -28,10 +29,10 @@ export default function AuthRequest(data, route) {
                 }
             })
             .catch((error) => {
-                let message = '';
-                if(error.response.data.message === 'The given data failed to pass validation.') {
-                    message = "Email is already used!"
-                }
+                let message = ''; console.log(error);
+                // if(error.response.data.message === 'The given data failed to pass validation.') {
+                //     message = "Email is already used!"
+                // }
                 dispatch({
                     type : 'ERROR',
                     payload : message

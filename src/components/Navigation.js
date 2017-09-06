@@ -11,11 +11,21 @@ class Navigation extends Component{
                 <Navbar default fixedTop fluid>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <LinkContainer to="/home">
-                                <NavItem eventKey={7}>
-                                    PersolnalMovieBook
-                                </NavItem>
-                            </LinkContainer>
+                            {
+                                this.props.auth.user.is_admin === 1 ?
+                                    <LinkContainer to="/admin/home">
+                                        <NavItem eventKey={7}>
+                                            PersolnalMovieBook
+                                        </NavItem>
+                                    </LinkContainer>
+                                    :
+                                    <LinkContainer to="/home">
+                                        <NavItem eventKey={7}>
+                                            PersolnalMovieBook
+                                        </NavItem>
+                                    </LinkContainer>
+                            }
+
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>

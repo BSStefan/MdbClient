@@ -154,7 +154,7 @@ class Login extends Component {
                                    </p>
                                 </Col>
                             </Row>
-                            {this.props.auth.redirect ? <Redirect to="/home" /> : null}
+                            {this.props.auth.redirect && this.props.auth.user.isAdmin ? <Redirect to="/admin/home" /> : this.props.auth.redirect ? <Redirect to="/home" /> : null}
                         </section>
                     </Col>
                 </Row>
@@ -176,7 +176,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         loader : () => {
             dispatch({
-                type : 'LOADER'
+                type : 'ADMIN_LOADER'
             });
         }
     }

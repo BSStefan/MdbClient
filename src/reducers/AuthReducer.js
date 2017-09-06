@@ -29,6 +29,7 @@ export const AuthReducer  = (
                         token : action.payload.token,
                         first_name : action.payload.first_name,
                         last_name : action.payload.last_name,
+                        is_admin: action.payload.is_admin
                     },
                     error : '',
                     loader : false,

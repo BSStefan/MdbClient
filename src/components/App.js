@@ -15,9 +15,12 @@ import MovieList from './../pages/user/MovieList';
 import Person from './../pages/user/Person';
 import AllGenres from './../pages/user/AllGenres';
 import UserLists from './../pages/user/UserLists';
+import AddMovies from './../pages/admin/AddMovies';
+import AdminHome from './../pages/admin/AdminHome';
 import PrivateComponent from './PrivateComponent';
 import RegisterGuard from './RegisterGuard';
 import PublicComponent from './PublicComponent';
+import AdminGuard from './AdminGuard';
 
 
 class App extends Component {
@@ -31,7 +34,8 @@ class App extends Component {
                   <section>
                       <Navigation/>
                       <Switch>
-                          <PublicComponent  isAuth={this.props.auth.isAuth} exact path="/login" component={Login}/>
+                          <PublicComponent  isAuth={this.props.auth.isAuth} exact path="/" component={Dashboard}/>
+                          <PublicComponent  isAuth={this.props.auth.isAuth} isAdmin={this.props.auth.user.is_admin} exact path="/login" component={Login}/>
                           <RegisterGuard    isAuth={this.props.auth.isAuth} isField={this.props.auth.movie} exact path="/register" component={Register}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/logout" component={Logout}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/home" component={Dashboard}/>
@@ -46,6 +50,8 @@ class App extends Component {
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/current-in-cinema/:page" component={MovieList}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/per-genre/:genre_id/:page" component={MovieList}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/all-genres" component={AllGenres}/>
+                          <AdminGuard isAuth={this.props.auth.isAuth} isAdmin={this.props.auth.user.is_admin} is exact path="/admin/home" component={AdminHome}/>
+                          <AdminGuard isAuth={this.props.auth.isAuth} isAdmin={this.props.auth.user.is_admin} is exact path="/admin/:type" component={AddMovies}/>
                           <Route component={NotFound}/>
                       </Switch>
                   </section>

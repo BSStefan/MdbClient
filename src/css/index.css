@@ -214,3 +214,12 @@ body {
 .user-movies{
   margin-top: 55px;
 }
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.disable-link{
+  cursor:not-allowed;
+}

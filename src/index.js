@@ -12,6 +12,7 @@ import { PersonReducer } from './reducers/PersonReducer';
 import { GenresReducer } from './reducers/GenresReducer';
 import { UserMoviesReducer } from './reducers/UserMoviesReducer';
 import { MovieProjections } from './reducers/MovieProjections';
+import  { AdminAddMoviesReducer } from './reducers/AdminAddMoviesReducer';
 import './css/index.css';
 import App from './components/App';
 import setTokenInRequest from './functions/setTokenInRequest';
@@ -25,7 +26,8 @@ const store=createStore(
         person : PersonReducer,
         genres : GenresReducer,
         userMovieList : UserMoviesReducer,
-        projections : MovieProjections
+        projections : MovieProjections,
+        adminMovies : AdminAddMoviesReducer
     }),
     {},
     compose(applyMiddleware(thunk), window.devToolsExtension ? window.devToolsExtension() : f => f));
@@ -40,7 +42,8 @@ if(localStorage.getItem('jwtToken')) {
             payload : {
                 'token' : localStorage.getItem('jwtToken'),
                 'first_name' : localStorage.getItem('name').split("/")[0],
-                'last_name' : localStorage.getItem('name').split("/")[1]
+                'last_name' : localStorage.getItem('name').split("/")[1],
+                'is_admin' : parseInt(localStorage.getItem('name').split("/")[2], 10)
             }
         });
     }
