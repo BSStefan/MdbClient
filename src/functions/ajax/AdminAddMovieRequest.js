@@ -1,30 +1,60 @@
 import axios from 'axios';
 
-export default function AdminAddMovieRequest(id) {
-    console.log(id);
+export default function AdminAddMovieRequest(id, title) {
     return dispatch => {
-        axios.post('http://mdb.dev/api/admin/tmdb/movie'+'/'+id)
-            .then((response) => {
-                if(response.data.error === false){
+        if(id === 0){
+            axios.post('http://mdb.dev/api/admin/crawler/current-movie', {title : title})
+                .then((response) => {
+                    if(response.data.error === false){
+                        dispatch({
+                            type : 'MOVIES_ADDED',
+                            payload : {
+                                tmdb_id  : 0,
+                                title : response.data.data.movie['title']
+                            }
+                        });
+                    }
+                    else {
+                        dispatch({
+                            type : 'ERROR1'
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
                     dispatch({
-                        type : 'MOVIES_ADDED',
-                        payload : {
-                            tmdb_id  : response.data.data.movie['tmdb_id'],
-                        }
+                        type : 'ERROR1',
+                        payload : 'tekst'
                     });
-                }
-                else {
+                })
+        }
+        else{
+            axios.post('http://mdb.dev/api/admin/tmdb/movie'+'/'+id)
+                .then((response) => {
+                    if(response.data.error === false){
+                        dispatch({
+                            type : 'MOVIES_ADDED',
+                            payload : {
+                                tmdb_id  : response.data.data.movie['tmdb_id'],
+                                title : response.data.data.movie['title']
+                            }
+                        });
+                    }
+                    else {
+                        dispatch({
+                            type : 'ERROR1'
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
                     dispatch({
-                        type : 'ERROR1'
+                        type : 'ERROR1',
+                        payload : 'tekst'
                     });
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-                dispatch({
-                    type : 'ERROR1',
-                    payload : 'tekst'
-                });
-            })
+                })
+        }
+
+
     }
 }

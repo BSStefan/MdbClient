@@ -223,3 +223,13 @@ body {
 .disable-link{
   cursor:not-allowed;
 }
+.admin-home{
+  margin-top: 35px;
+  color: #FFF;
+}
+.admin-buttons{
+  margin-bottom: 20px;
+}
+.list-movies-in-cinema{
+  color:#008491;
+}

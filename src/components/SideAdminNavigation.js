@@ -15,6 +15,12 @@ class SideAdminNavigation extends Component {
                     <LinkContainer to="/admin/popular-movies" onClick={() => this.props.loadNewMovies('popular-movies')}>
                         <NavItem eventKey={2}>Most popular movies</NavItem>
                     </LinkContainer>
+                    <LinkContainer to="/admin/current-in-cinema" onClick={() => this.props.loadNewMovies('current-in-cinema')}>
+                        <NavItem eventKey={3}>Current in Cinema</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/projections">
+                        <NavItem eventKey={3}>Projections</NavItem>
+                    </LinkContainer>
                 </Nav>
             </aside>
         );

@@ -15,7 +15,7 @@ class AddMovies extends Component {
     componentWillMount() {
         let type = this.props.match.params.type;
         let page = this.findCurrentPage();
-        console.log(page);
+        this.props.startLoader();
         this.props.loadMovies(type,page);
     };
     findMovies(){
@@ -62,10 +62,10 @@ class AddMovies extends Component {
         let next = (page+1);
         return [prev,next];
     }
-    addMovie(id){
+    addMovie(id, title){
         console.log(id);
         this.props.startLoader();
-        this.props.addMovie(id);
+        this.props.addMovie(id,title);
     }
     handleUnRedirect(e){
         e.preventDefault();
@@ -83,9 +83,9 @@ class AddMovies extends Component {
                         <ListGroup>
                             {
                                 this.props.movies.movies.map((movie)=>
-                                    <ListGroupItem key={movie['tmdb_id']} className="clearfix">
+                                    <ListGroupItem key={movie['title']} className="clearfix">
                                         {movie['title']}
-                                        {!movie['exists'] ? <Button className="pull-right" onClick={()=>this.addMovie(movie['tmdb_id'])}>Add</Button> : <Button bsStyle="success" disabled className="pull-right">Already in db</Button>}
+                                        {!movie['exists'] ? <Button className="pull-right" onClick={()=>this.addMovie(movie['tmdb_id'], movie['title'])}>Add</Button> : <Button bsStyle="success" disabled className="pull-right">Already in db</Button>}
                                     </ListGroupItem>
                                 )
                             }
@@ -123,8 +123,8 @@ const mapDispatchToProps = (dispatch) => {
         loadMovies : (type, page) => {
             dispatch(AdminGetMoviesRequest(type, page));
         },
-        addMovie : (id) => {
-            dispatch(AdminAddMovieRequest(id));
+        addMovie : (id, title) => {
+            dispatch(AdminAddMovieRequest(id, title));
         },
         startLoader : () => {
             dispatch({
