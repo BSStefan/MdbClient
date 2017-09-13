@@ -81,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 App.propTypes={
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

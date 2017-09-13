@@ -39,7 +39,7 @@ export const MovieListReducer  = (
                 pagination: action.payload[1]
             };
             return newState;
-        case 'DESTROY_DASHBOARD_INFO' : {
+        case 'DESTROY_DASHBOARD_INFO' :
             newState = {
                 ...newState,
                 recommendation: [],
@@ -50,7 +50,6 @@ export const MovieListReducer  = (
                 pagination: {}
             };
             return newState;
-        }
         case 'PER_GENRE':
             newState = {
                 ...newState,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col} from 'react-bootstrap';
+import { Grid, Row, Col, Alert} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -29,6 +29,10 @@ class Dashboard extends Component {
                         <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)} loadNewUserMovies={(t) => this.handleNewUserMovies(t)} />
                     </Col>
                     <Col sm={10} className="movie-small-list">
+                        {this.props.error !== '' ?
+                            <Col sm={12}><Alert className="text-center" bsStyle="danger">{this.props.error}</Alert></Col>
+                            : null
+                        }
                         <Col sm={12}>
                             <h3><b>Recommendation</b></h3>
                         </Col>
@@ -49,7 +53,8 @@ class Dashboard extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        listMovies : state.listMovies
+        listMovies : state.listMovies,
+        error : state.error.error
     }
 };
 
@@ -71,7 +76,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type : 'DESTROY_DASHBOARD_INFO'
             });
-        }
+        },
+        destroyError : () => {
+            dispatch({
+                type: 'DESTROY_GLOBAL_ERROR'
+            });
+        },
     }
 };
 

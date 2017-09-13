@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Pager, Button} from 'react-bootstrap';
+import { Grid, Row, Col, Pager, Button, Alert} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink} from 'react-router-dom';
@@ -21,9 +21,13 @@ class MovieList extends Component {
                 this.props.loadMovies(type, page);
             }
         }
-
-
     };
+    componentWillUnmount() {
+        this.props.destroyListMovies();
+        if(this.props.error !== '') {
+            this.props.destroyError();
+        }
+    }
     getType(){
         return window.location.pathname.split('/')[1];
     }
@@ -49,9 +53,15 @@ class MovieList extends Component {
         else{
             this.props.loadMovies(type, page);
         }
+        if(this.props.error !== '') {
+            this.props.destroyError();
+        }
     }
     handleNewMovies(type) {
         this.props.loadMovies(type, 1);
+        if(this.props.error !== '') {
+            this.props.destroyError();
+        }
     }
     makeNewLinks(){
         let page = parseInt(this.props.match.params.page, 10);
@@ -81,6 +91,10 @@ class MovieList extends Component {
                         <Col sm={12}>
                             <h3><b>{this.findMovies()[1]}</b></h3>
                         </Col>
+                        {this.props.error !== '' ?
+                            <Col sm={12}><Alert className="text-center" bsStyle="danger">{this.props.error}</Alert></Col>
+                            : null
+                        }
                         <SmallMovieList movies={this.props.listMovies[this.findMovies()[0]]} filter={this.findMovies()[0]} />
                     </Col>
                 </Row>
@@ -106,7 +120,8 @@ class MovieList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        listMovies : state.listMovies
+        listMovies : state.listMovies,
+        error: state.error.error
     }
 };
 
@@ -114,6 +129,16 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadMovies : (type, page, genreId=0) => {
             dispatch(LoadMovieListRequest(type, 24, page, genreId));
+        },
+        destroyListMovies : () => {
+            dispatch({
+                type : 'DESTROY_DASHBOARD_INFO'
+            });
+        },
+        destroyError : () => {
+            dispatch({
+                type: 'DESTROY_GLOBAL_ERROR'
+            });
         },
     }
 };
