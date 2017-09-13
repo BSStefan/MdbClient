@@ -23,15 +23,21 @@ export default function AdminGetMoviesRequest(route, page) {
                 }
                 else {
                     dispatch({
-                        type : 'ERROR1'
+                        type : 'ADMIN_LOADER_TURNOFF',
+                    });
+                    dispatch({
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
-                console.log(error);
                 dispatch({
-                    type : 'ERROR1',
-                    payload : 'tekst'
+                    type : 'ADMIN_LOADER_TURNOFF',
+                });
+                dispatch({
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

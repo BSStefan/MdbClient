@@ -28,6 +28,23 @@ export const AdminAddMoviesReducer  = (
                 info : {}
             };
             return newState;
+        case 'DESTROY_MOVIES':
+            newState = {
+                ...newState,
+            };
+            newState = {
+                movies : [],
+                currentPage : 0,
+                totalPages : 0,
+                loader : false,
+                info: {},
+                projections : {
+                    movies : [],
+                    movies_msg : false,
+                    projections_msg: false
+                }
+            };
+            return newState;
         case 'ADMIN_LOADER' :
             newState ={
                 ...newState,

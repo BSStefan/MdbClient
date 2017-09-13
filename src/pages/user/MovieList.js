@@ -13,12 +13,15 @@ class MovieList extends Component {
     componentWillMount() {
         let page = parseInt(this.props.match.params.page, 10);
         let type = this.getType();
-        if(type === 'per-genre'){
-            this.props.loadMovies(this.getType(), page, this.props.match.params.genre_id);
+        if(this.props.listMovies[this.findMovies()[0]].length === 0){
+            if(type === 'per-genre'){
+                this.props.loadMovies(type, page, this.props.match.params.genre_id);
+            }
+            else{
+                this.props.loadMovies(type, page);
+            }
         }
-        else{
-            this.props.loadMovies(this.getType(), page);
-        }
+
 
     };
     getType(){

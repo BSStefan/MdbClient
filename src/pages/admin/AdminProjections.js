@@ -15,9 +15,6 @@ class AdminProjections extends Component {
     componentWillMount() {
         this.props.destroyLoader();
     }
-    componentWillUnmount() {
-        this.props.destroyProjectionsInfo();
-    }
     handleNewMovies(t){
     }
     handleSaveMovies(){
@@ -39,6 +36,7 @@ class AdminProjections extends Component {
                         <SideAdminNavigation loadNewMovies={(t) => this.handleNewMovies(t)}/>
                     </Col>
                     <Col sm={10} className="admin-home">
+                        {this.props.error !== '' ? <Col sm={12}><Alert className="text-center" bsStyle="danger">{this.props.error}</Alert></Col> : null}
                         <Row className="admin-buttons">
                             <Col sm={4} smOffset={2}>
                                 <Button bsSize="large" className="mdb-main-btn" onClick={this.handleSaveMovies.bind(this)}>Save movies</Button>
@@ -56,7 +54,7 @@ class AdminProjections extends Component {
                                     this.props.adminProjections.projections.movies_msg === 'Success' ?
                                         <ListGroup className="list-movies-in-cinema">
                                             {this.props.adminProjections.projections.movies.map((movie)=>
-                                                <ListGroupItem>
+                                                <ListGroupItem key={movie['title']}>
                                                     <span>{movie['title']}</span><span className="pull-right">{movie['status'] ? "Success" : "Failed"}</span>
                                                 </ListGroupItem>
 
@@ -77,7 +75,8 @@ class AdminProjections extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        adminProjections : state.adminMovies
+        adminProjections : state.adminMovies,
+        error : state.error.error
     }
 };
 

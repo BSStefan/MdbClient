@@ -73,6 +73,12 @@ export const AuthReducer  = (
                     movies_redirect : true
                 };
                 return newState;
+            case 'RESTART_ERROR' :
+                newState = {
+                    ...newState,
+                    error: ''
+                };
+                return newState;
             default:
                 return state;
         }

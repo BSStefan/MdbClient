@@ -11,15 +11,15 @@ export default function ThreeFavoriteMovieRequest(data) {
                 }
                 else {
                     dispatch({
-                        type : 'ERROR',
-                        payload : response.data.message
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
                 dispatch({
-                    type : 'ERROR',
-                    payload : ''
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

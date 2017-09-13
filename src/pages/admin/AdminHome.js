@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Jumbotron} from 'react-bootstrap';
+import { Grid, Row, Col, Jumbotron, Alert} from 'react-bootstrap';
 
 import PropTypes from 'prop-types';
 import { connect }  from 'react-redux';
@@ -15,6 +15,9 @@ class AdminHome extends Component {
     }
     componentWillUnmount() {
         this.props.destroyInfo();
+        if(this.props.error !== '') {
+            this.props.destroyError();
+        }
     }
     handleNewMovies(t){
     }
@@ -26,6 +29,10 @@ class AdminHome extends Component {
                         <SideAdminNavigation loadNewMovies={(t) => this.handleNewMovies(t)}/>
                     </Col>
                     <Col sm={10} className="admin-home">
+                        {this.props.error !== '' ?
+                            <Col sm={12}><Alert className="text-center" bsStyle="danger">{this.props.error}</Alert></Col>
+                            : null
+                        }
                         <Col sm={4}>
                             <Jumbotron className="text-center" style={{backgroundColor:"#0097A7"}}>
                                 <h3>Movies in Db:</h3>
@@ -65,7 +72,8 @@ class AdminHome extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        adminInfo : state.adminMovies.info
+        adminInfo : state.adminMovies.info,
+        error : state.error.error
     }
 };
 
@@ -77,6 +85,11 @@ const mapDispatchToProps = (dispatch) => {
         destroyInfo : () => {
             dispatch({
                 type: 'DESTROY_INFO'
+            });
+        },
+        destroyError : () => {
+            dispatch({
+                type: 'DESTROY_GLOBAL_ERROR'
             });
         },
     }

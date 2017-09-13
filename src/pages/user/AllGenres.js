@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, ListGroupItem, ListGroup} from 'react-bootstrap';
+import { Grid, Row, Col, ListGroupItem, ListGroup, Alert} from 'react-bootstrap';
 import PersonDetails from './../../components/PersonDetails';
 import PropTypes from 'prop-types';
 import { connect }  from 'react-redux';
@@ -17,6 +17,11 @@ class AllGenres extends Component {
     handleNewMovies(type) {
         this.props.loadMovies(type, 1);
     }
+    componentWillUnmount() {
+        if(this.props.error !== '') {
+            this.props.destroyError();
+        }
+    }
     handleNewUserMovies() {}
     render(){
         return (
@@ -26,6 +31,10 @@ class AllGenres extends Component {
                         <SideNavigation loadNewMovies={(t) => this.handleNewMovies(t)} loadNewUserMovies={(t) => this.handleNewUserMovies(t)}/>
                     </Col>
                     <Col sm={9} smOffset={1} className="movie-one">
+                        {this.props.error !== '' ?
+                            <Col sm={12}><Alert className="text-center" bsStyle="danger">{this.props.error}</Alert></Col>
+                            : null
+                        }
                         <ListGroup>
                         {this.props.genres.genres.map((genre) =>
                             <ListGroupItem key={genre['id']}>
@@ -44,7 +53,8 @@ class AllGenres extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        genres : state.genres
+        genres : state.genres,
+        error : state.error.error
     }
 };
 
@@ -55,6 +65,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         loadMovies : (type, page) => {
             dispatch(LoadMovieListRequest(type, 24, page));
+        },
+        destroyError : () => {
+            dispatch({
+                type: 'DESTROY_GLOBAL_ERROR'
+            });
         },
     }
 };

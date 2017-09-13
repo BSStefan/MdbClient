@@ -29,10 +29,10 @@ export default function AuthRequest(data, route) {
                 }
             })
             .catch((error) => {
-                let message = ''; console.log(error);
-                // if(error.response.data.message === 'The given data failed to pass validation.') {
-                //     message = "Email is already used!"
-                // }
+                let message = '';
+                if(error.response.data.message === 'The given data failed to pass validation.') {
+                    message = "Email is already used!"
+                }
                 dispatch({
                     type : 'ERROR',
                     payload : message

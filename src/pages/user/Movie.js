@@ -30,12 +30,14 @@ class Movie extends Component {
     handleAddToWatched(id) {
         this.props.watchedOrToBe(false, id);
     }
+
     handleFindLocation() {
         navigator.geolocation.getCurrentPosition(this.handleFindProjections.bind(this), this.handleFindProjections.bind(this));
     }
+
     handleFindProjections(location) {
-        if(location.code === 1){
-            this.props.loadProjections(this.props.movie.movie.details.id, 'Belgrade');
+        if(location.code === 1 || location.code === 2){
+            this.props.loadProjections(this.props.movie.movie.details.id, 'Beograd');
         }
         else{
             let latitude  = location.coords.latitude;
@@ -44,6 +46,7 @@ class Movie extends Component {
             this.props.loadProjections(this.props.movie.movie.details.id, city);
         }
     }
+
     findCity(latitude, longitude) {
         let citys =[
             {
@@ -71,6 +74,7 @@ class Movie extends Component {
         }
         return 'Nis';
     }
+
     destroyListProjections() {
         this.props.destroyProjections();
     }

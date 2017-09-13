@@ -53,15 +53,15 @@ export default function UserReactionRequest(object, list) {
                 }
                 else {
                     dispatch({
-                        type : 'REACTIONERROR',
-                        payload : 'Something is wrong, please try again'
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
                 dispatch({
-                    type : 'REACTIONERROR',
-                    payload : 'Something is wrong, please try again'
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

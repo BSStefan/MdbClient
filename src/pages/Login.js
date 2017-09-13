@@ -18,6 +18,7 @@ class Login extends Component {
     }
     componentWillUnmount() {
         document.body.style.background = '#FFF';
+        this.props.restartError();
     }
 
     constructor(props) {
@@ -178,7 +179,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type : 'ADMIN_LOADER'
             });
-        }
+        },
+        restartError : () => {
+            dispatch({
+                type : 'RESTART_ERROR'
+            });
+        },
     }
 };
 

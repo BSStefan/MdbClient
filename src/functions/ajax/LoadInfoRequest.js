@@ -15,15 +15,16 @@ export default function LoadInfoRequest() {
                 }
                 else {
                     dispatch({
-                        type : 'ERROR1'
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
                 console.log(error);
                 dispatch({
-                    type : 'ERROR1',
-                    payload : 'tekst'
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

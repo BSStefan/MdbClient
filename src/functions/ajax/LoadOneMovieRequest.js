@@ -16,16 +16,16 @@ export default function LoadOneMovieRequest(id) {
                 }
                 else {
                     dispatch({
-                        type : 'ERROR',
-                        payload : response.data.data.movies
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
                 console.log(error);
                 dispatch({
-                    type : 'ERROR',
-                    payload : 'tekst'
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

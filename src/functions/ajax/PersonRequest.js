@@ -15,15 +15,16 @@ export default function PersonRequest(role, id) {
                 }
                 else {
                     dispatch({
-                        type : 'ERROR'
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
                 console.log(error);
                 dispatch({
-                    type : 'ERROR',
-                    payload : 'tekst'
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

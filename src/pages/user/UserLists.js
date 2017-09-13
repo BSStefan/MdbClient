@@ -104,7 +104,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadUserMovies : (type, page) => {
-            dispatch(LoadMovieUserListRequest(type, 2, page));
+            dispatch(LoadMovieUserListRequest(type, 24, page));
         },
     }
 };

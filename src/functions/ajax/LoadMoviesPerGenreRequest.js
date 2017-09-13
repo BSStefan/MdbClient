@@ -26,16 +26,16 @@ export default function LoadMoviesPerGenreRequest(route, number, page=1) {
                 }
                 else {
                     dispatch({
-                        type : action,
-                        payload : response.data.data.movies
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
                 console.log(error);
                 dispatch({
-                    type : 'NEWMOVIES',
-                    payload : 'tekst'
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

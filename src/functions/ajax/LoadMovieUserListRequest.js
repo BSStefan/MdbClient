@@ -20,14 +20,16 @@ export default function LoadMovieUserListRequest(route, number, page=1) {
                 }
                 else {
                     dispatch({
-                        type : 'ERROR1',
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
                 console.log(error);
                 dispatch({
-                    type : 'ERROR1'
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

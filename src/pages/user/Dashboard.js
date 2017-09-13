@@ -11,13 +11,15 @@ class Dashboard extends Component {
     componentWillMount() {
          this.props.loadNew();
          this.props.loadMostPopular();
+         this.props.loadRecommendation();
     };
+    componentWillUnmount() {
+        this.props.destroyDashboardInfo();
+    }
     handleNewMovies(type) {
-        this.props.loadMovies(type, 1);
+        //this.props.loadMovies(type, 1);
     }
-    handleNewUserMovies(type) {
-        //this.props.loadUserMovies(type, 1);
-    }
+    handleNewUserMovies(type) {}
 
     render(){
         return (
@@ -64,6 +66,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         loadMostPopular : () => {
             dispatch(LoadMovieListRequest('most-liked', 12));
+        },
+        destroyDashboardInfo : () => {
+            dispatch({
+                type : 'DESTROY_DASHBOARD_INFO'
+            });
         }
     }
 };

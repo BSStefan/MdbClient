@@ -26,16 +26,16 @@ export default function UserLikeDislikeOneRequest(action, id) {
                 }
                 else {
                     dispatch({
-                        type : 'REACTIONERROR',
-                        payload : 'Something is wrong, please try again'
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
                 console.log(error);
                 dispatch({
-                    type : 'REACTIONERROR',
-                    payload : 'Something is wrong, please try again'
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }

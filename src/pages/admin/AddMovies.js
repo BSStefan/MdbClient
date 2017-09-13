@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Pager, Button, ListGroup, ListGroupItem} from 'react-bootstrap';
+import { Grid, Row, Col, Pager, Button, ListGroup, ListGroupItem, Alert} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
@@ -18,12 +18,10 @@ class AddMovies extends Component {
         this.props.startLoader();
         this.props.loadMovies(type,page);
     };
-    findMovies(){
-        switch (this.props.match.params.type) {
-            case 'new-movies':
-                return ['newMovies', 'New Movies'];
-            case 'popular-movies':
-                return ['popularMovies', 'Popular Movies'];
+    componentWillUnmount(){
+        this.props.destroyMovies();
+        if(this.props.error !== '') {
+            this.props.destroyError();
         }
     }
     handleRedirect(page) {
@@ -38,7 +36,6 @@ class AddMovies extends Component {
     checkIfThereIsAnotherPage(){
         let previous = this.props.movies.currentPage > 1;
         let next = this.props.movies.currentPage < this.props.movies.totalPages;
-
         return {
             previous : previous,
             next : next
@@ -63,7 +60,6 @@ class AddMovies extends Component {
         return [prev,next];
     }
     addMovie(id, title){
-        console.log(id);
         this.props.startLoader();
         this.props.addMovie(id,title);
     }
@@ -79,6 +75,7 @@ class AddMovies extends Component {
                         <SideAdminNavigation loadNewMovies={(t) => this.handleNewMovies(t)}/>
                     </Col>
                     <Col sm={10} className="movie-small-list">
+                        {this.props.error !== '' ? <Col sm={12}><Alert className="text-center" bsStyle="danger">{this.props.error}</Alert></Col> : null}
                         <h2>Movies</h2>
                         <ListGroup>
                             {
@@ -114,7 +111,8 @@ class AddMovies extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        movies : state.adminMovies
+        movies : state.adminMovies,
+        error  : state.error.error
     }
 };
 
@@ -123,6 +121,11 @@ const mapDispatchToProps = (dispatch) => {
         loadMovies : (type, page) => {
             dispatch(AdminGetMoviesRequest(type, page));
         },
+        destroyMovies : () => {
+            dispatch({
+                type : 'DESTROY_MOVIES'
+            });
+        },
         addMovie : (id, title) => {
             dispatch(AdminAddMovieRequest(id, title));
         },
@@ -130,12 +133,18 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type : 'ADMIN_LOADER'
             });
-        }
+        },
+        destroyError : () => {
+            dispatch({
+                type: 'DESTROY_GLOBAL_ERROR'
+            });
+        },
     }
 };
 
 AddMovies.propTypes={
     movies: PropTypes.object.isRequired,
+    error: PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddMovies);

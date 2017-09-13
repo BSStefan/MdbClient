@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -33,9 +33,15 @@ class App extends Component {
           <div className="App">
               <BrowserRouter>
                   <section>
-                      <Navigation/>
+                      <Navigation auth={this.props.auth}/>
                       <Switch>
-                          <PrivateComponent  isAuth={this.props.auth.isAuth} exact path="/" component={Dashboard}/>
+                          <Route exact path="/" render={() => (
+                              this.props.auth.user && this.props.auth.user.is_admin ? (
+                                  <Redirect to="/admin/home"/>
+                              ) : (
+                                  <PrivateComponent  isAuth={this.props.auth.isAuth} exact path="/" component={Dashboard}/>
+                              )
+                          )}/>
                           <PublicComponent  isAuth={this.props.auth.isAuth} isAdmin={this.props.auth.user.is_admin} exact path="/login" component={Login}/>
                           <RegisterGuard    isAuth={this.props.auth.isAuth} isField={this.props.auth.movie} exact path="/register" component={Register}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/logout" component={Logout}/>
@@ -48,6 +54,7 @@ class App extends Component {
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/person/:role/:id" component={Person}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/most-liked/:page" component={MovieList}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/new-movies/:page" component={MovieList}/>
+                          <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/recommendation/:page" component={MovieList}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/current-in-cinema/:page" component={MovieList}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/per-genre/:genre_id/:page" component={MovieList}/>
                           <PrivateComponent isAuth={this.props.auth.isAuth} exact path="/all-genres" component={AllGenres}/>

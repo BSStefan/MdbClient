@@ -15,15 +15,21 @@ export default function GenresRequest() {
                 }
                 else {
                     dispatch({
-                        type : 'ERROR'
+                        type : 'ADMIN_LOADER_TURNOFF',
+                    });
+                    dispatch({
+                        type : 'SET_GLOBAL_ERROR',
+                        payload : 'There was an error, please try again. :('
                     });
                 }
             })
             .catch((error) => {
-                console.log(error);
                 dispatch({
-                    type : 'ERROR',
-                    payload : 'tekst'
+                    type : 'ADMIN_LOADER_TURNOFF',
+                });
+                dispatch({
+                    type : 'SET_GLOBAL_ERROR',
+                    payload : 'There was an error, please try again. :('
                 });
             })
     }
